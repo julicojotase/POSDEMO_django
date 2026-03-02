@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>POS</title>
+
+<script src="/static/js/pos.js"></script>
+
+</head>
+
+<body>
+
+<h1>Punto de Venta</h1>
+
+<input type="text" id="barcode" placeholder="Código barras" autofocus>
+
+<hr>
+
+<h3>Productos</h3>
+
+<div>
+
+{% for p in products %}
+
+<button onclick="addProduct('{{p.id}}','{{p.name}}','{{p.price}}')">
+
+{{p.name}} - {{p.price}}
+
+</button>
+
+{% endfor %}
+
+</div>
+
+<hr>
+
+<h3>Carrito</h3>
+
+<form method="POST" action="/create-sale/">
+
+{% csrf_token %}
+
+<table id="cart">
+
+</table>
+
+Total: <span id="total">0</span>
+
+<br>
+
+Pago:
+
+<input type="number" name="paid" step="0.01">
+
+<br><br>
+
+<button type="submit">COBRAR</button>
+
+</form>
+
+</body>
+</html>
